@@ -1,0 +1,28 @@
+# Dynamic Traefik configuration
+http:
+  middlewares:
+    # Security headers
+    security-headers:
+      headers:
+        browserXssFilter: true
+        contentTypeNosniff: true
+        forceSTSHeader: true
+        stsIncludeSubdomains: true
+        stsPreload: true
+        stsSeconds: 31536000
+        frameDeny: true
+        sslRedirect: true
+        customFrameOptionsValue: "SAMEORIGIN"
+    
+    # Rate limiting
+    rate-limit:
+      rateLimit:
+        average: 100
+        burst: 50
+
+  routers:
+    # Default router (can be overridden in docker-compose labels)
+    default:
+      rule: "Host(`localhost`)"
+      service: "noop@internal"
+
