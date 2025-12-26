@@ -16,7 +16,7 @@ RUN composer install \
     --optimize-autoloader
 
 # Generate optimized autoloader
-RUN composer dump-autoload --optimize --classmap-authoritative
+RUN composer dump-autoload --optimize --classmap-authoritative --no-scripts
 
 # Stage 2: PHP-FPM runtime (minimal Alpine)
 FROM php:8.2-fpm-alpine3.18
