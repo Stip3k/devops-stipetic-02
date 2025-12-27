@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Laravel Application (PHP-FPM)
   laravel-app:
@@ -56,6 +54,13 @@ services:
       - app-network
     labels:
       - "traefik.enable=true"
+      # HTTP router - catch-all for all HTTP requests (works with localhost, IP addresses, any domain)
+      # This will match any request, allowing access from other computers via IP
+      - "traefik.http.routers.nginx-http.rule=HostRegexp(`.*`)"
+      - "traefik.http.routers.nginx-http.entrypoints=web"
+      - "traefik.http.routers.nginx-http.service=nginx"
+      - "traefik.http.routers.nginx-http.priority=100"
+      # HTTPS router for production domains (only if DOMAIN is set and not localhost)
       - "traefik.http.routers.nginx.rule=Host(`${DOMAIN:-localhost}`)"
       - "traefik.http.routers.nginx.entrypoints=websecure"
       - "traefik.http.routers.nginx.tls.certresolver=letsencrypt"

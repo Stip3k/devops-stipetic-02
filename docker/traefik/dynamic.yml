@@ -21,8 +21,5 @@ http:
         burst: 50
 
   routers:
-    # Default router (can be overridden in docker-compose labels)
-    default:
-      rule: "Host(`localhost`)"
-      service: "noop@internal"
+    # Default router removed - using docker labels for routing instead
 
