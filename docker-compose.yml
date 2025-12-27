@@ -46,10 +46,13 @@ services:
     restart: unless-stopped
     ports:
       - "80:80"
+<<<<<<< HEAD
       - "${SSL_PORT:-443}:443"
     environment:
       - DOMAIN=${DOMAIN:-localhost}
       - SSL_ENABLED=${SSL_ENABLED:-false}
+=======
+>>>>>>> 2623ba20ace9b6c972118153c05f6fc6e734949d
     volumes:
       - ./ucilnice:/var/www/html:ro
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
@@ -128,11 +131,14 @@ volumes:
     driver: local
   redis_data:
     driver: local
+<<<<<<< HEAD
   # Certbot volumes (only needed if using Let's Encrypt)
   certbot-www:
     driver: local
   certbot-conf:
     driver: local
+=======
+>>>>>>> 2623ba20ace9b6c972118153c05f6fc6e734949d
 
 networks:
   app-network:
